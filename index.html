@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random list</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+     align-items: center;
+        width: 100%;
+        padding: 10% 0 0 0;
+      }
+      h1{
+        padding: 20px;
+      }
+      .card {
+        border-radius: 5px;
+        max-width: 500px;
+        width: 100%;
+        padding: 15px;
+        box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+      li {
+        padding: 10px;
+        font-size: 20px;
+        list-style: none;
+      }
+      .list {
+        border: 1px solid rgb(210, 205, 205);
+        border-radius: 5px;
+      }
+      #textarea {
+        width: 100%;
+        resize: none;
+        outline: none;
+        border: navajowhite;
+      }
+      input {
+        border: none;
+        outline: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+      .number {
+        border: 1px solid rgb(201, 196, 196);
+        border-radius: 5px;
+      }
+      button {
+        margin: auto;
+        margin: auto 0;
+        background-color: rgb(117, 236, 247);
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        margin: 10px auto;
+        color: white;
+      }
+      .sumbit {
+        width: 100%;
+
+        display: flex;
+      }
+      .display-random-list {
+        overflow-y: scroll;
+        max-height: 300px;
+      }
+      ul {
+        border: 1px solid rgb(201, 196, 196);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>generate dynamic list</h1>
+      <div class="card">
+        <div class="custom-number">
+          <input type="number" class="number" value="1" />
+        </div>
+        <div class="list">
+          <textarea name="" id="textarea" rows="10" placeholder="Enter list data"></textarea>
+        </div>
+        <div class="sumbit">
+          <button>random</button>
+        </div>
+        <div class="display-random-list">
+       
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const customnumber = document.querySelector(".number");
+      const texarea = document.querySelector("#textarea");
+      const button = document.querySelector("button");
+      const displayrandomlist = document.querySelector(".display-random-list");
+      let array = [];
+      texarea.addEventListener("change",function(){
+        let textarray=texarea.value.split('\n');
+        array.push(...textarray)
+      })
+
+const generateList = (list, items) => {
+  const shuffledList = [...list].sort(() => Math.random() > 0.5 ? 1 : -1);
+  const uniqueItems = new Set(shuffledList);
+  const result = [...uniqueItems].slice(0, items);
+  return result;
+};
+
+      button.addEventListener("click", function (e) {
+    if (customnumber.value>array.length) {
+      alert('numbarka aad galisay iyo listiga nubmarka badan ')
+      return
+    }
+      let randomlist= (generateList(array,customnumber.value)) 
+        console.log(randomlist)
+        displayrandomlist.innerHTML=''
+
+randomlist.forEach((item, index)=>{
+
+  displayrandomlist.innerHTML +=`<h3>${index+1}: ${item}</h3>`
+})
+
+
+       
+    
+
+
+      });
+    </script>
+  </body>
+</html>
